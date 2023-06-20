@@ -1,4 +1,4 @@
 # Changelog
 
-[1.0.0] - 2022-10-23
-- This is the first release of [Package Name]
+[0.0.1] - 2023-6-19
+- setting up documentation
