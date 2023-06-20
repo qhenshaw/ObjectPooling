@@ -1,11 +1,11 @@
 {
   "displayName": "Object Pooling",
   "author": "Quin Henshaw",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "name": "com.qhenshaw.objectpooling",
   "documentationUrl": "https://github.com/qhenshaw/objectpooling",
   "changelogUrl": "https://github.com/qhenshaw/objectpooling/blob/main/CHANGELOG.md",
   "licensesUrl": "https://github.com/qhenshaw/objectpooling/blob/main/LICENSE.md",
   "description": "A lazy initialized object pooling system for Unity3D.",
-  "unity": "2020.1"
+  "unity": "2021.3"
 }

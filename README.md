@@ -14,15 +14,42 @@ https://github.com/qhenshaw/ObjectPooling.git
 ```
 
 ## Usage
-Object intended for pooling require a component inheriting from PooledObject. Pools are automatically created a populated when requesting objects from the pool system.
+Prefabs intended for pooling require a component implementing IPoolable. Pools are automatically created and populated when requesting objects from the pool system.
+A generic base class implementation of IPoolable is included as PooledObject.
+No scene setup is required, simply get a reference to an IPoolable implementing class and request it from the PoolSystem:
 
 ```cs
 // reference prefab inheriting from PooledObject
-[SerializeField] private PooledParticleSystem _pooledParticlePrefab;
+[SerializeField] private TimedPooledObject _pooledPrefab;
 ```
 ```cs
 // request pooled copy of prefab from system
-PooledParticleSystem ps = PoolSystem.Instance.Get(_pooledParticlePrefab);
+TimedPooledObject pooled = PoolSystem.Instance.Get(_pooledPrefab);
 // return object to pool when done
-ps.Pool.Release();
+pooled.ReturnToPool();
+```
+
+The current status of a PooledObject can be checked with IsInPool.
+An example script for adding a timer to return the object can be seen here:
+```cs
+using UnityEngine;
+using ObjectPooling;
+
+public class TimedPooledObject : PooledObject
+{
+    [SerializeField] private float _duration = 2f;
+
+    private float _spawnTime;
+
+    private void OnEnable()
+    {
+        _spawnTime = Time.time;
+    }
+
+    private void Update()
+    {
+        if (IsInPool) return;
+        if (Time.time > _spawnTime + _duration) ReturnToPool();
+    }
+}
 ```
